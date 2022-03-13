@@ -1,0 +1,12 @@
+[
+{
+  "directory": "C:/Users/12235/Desktop/prove/build",
+  "command": "D:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-g++.exe -Ddetector_EXPORTS @CMakeFiles/detector.dir/includes_CXX.rsp -Wno-error=deprecated-declarations -std=gnu++2a -o CMakeFiles\\detector.dir\\sjtu.cpp.obj -c C:\\Users\\12235\\Desktop\\prove\\sjtu.cpp",
+  "file": "C:/Users/12235/Desktop/prove/sjtu.cpp"
+},
+{
+  "directory": "C:/Users/12235/Desktop/prove/build",
+  "command": "D:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/detect_test.dir/includes_CXX.rsp -Wno-error=deprecated-declarations -std=gnu++2a -o CMakeFiles\\detect_test.dir\\main.cpp.obj -c C:\\Users\\12235\\Desktop\\prove\\main.cpp",
+  "file": "C:/Users/12235/Desktop/prove/main.cpp"
+}
+]

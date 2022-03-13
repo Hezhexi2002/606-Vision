@@ -1,0 +1,1 @@
+-I"D:/Program Files/Intel/openvino_2021.4.752/deployment_tools/inference_engine/include/ngraph/include" -IC:/Users/12235/Desktop/prove/include -isystem D:/PROGRA~1/Intel/openvino_2021.4.752/deployment_tools/inference_engine/include -isystem D:/PROGRA~1/Intel/openvino_2021.4.752/opencv/include

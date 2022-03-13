@@ -1,0 +1,4 @@
+C:/Users/12235/Desktop/prove/build/CMakeFiles/detector.dir
+C:/Users/12235/Desktop/prove/build/CMakeFiles/detect_test.dir
+C:/Users/12235/Desktop/prove/build/CMakeFiles/edit_cache.dir
+C:/Users/12235/Desktop/prove/build/CMakeFiles/rebuild_cache.dir
