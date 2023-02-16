@@ -1,5 +1,0 @@
-_workspace_packages=( ${(Q)"${(z)$(<<\EO:_workspace_packages
-'mindvision' 'robot_camera' 'robot_msgs' 'robot_detection'
-EO:_workspace_packages
-)}"} )
-_workspace_cache_file_path='/home/hezhexi2002/WorkSpace/606-Vision/.catkin_tools/cache'
