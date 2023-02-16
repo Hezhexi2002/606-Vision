@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 14)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED)
-find_package(OpenCV 4.5.3 REQUIRED)
+find_package(OpenCV 4 REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp

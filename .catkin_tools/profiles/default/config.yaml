@@ -17,7 +17,6 @@ licenses:
 log_space: logs
 maintainers: []
 make_args: []
-needs_force: false
 source_space: src
 use_env_cache: false
 use_internal_make_jobserver: true
