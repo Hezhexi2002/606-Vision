@@ -30,7 +30,7 @@ void write_callback(const std_msgs::String::ConstPtr& msg){
 }
 
 int main (int argc, char** argv){
-    ros::init(argc, argv, "serial_example_node");
+    ros::init(argc, argv, "serial_node");
     ros::NodeHandle nh;
 
     ros::Subscriber write_sub = nh.subscribe("write", 1000, write_callback);

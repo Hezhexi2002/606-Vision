@@ -1,17 +1,21 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(robot_serial)
 
+set(CMAKE_CXX_STANDARD 14)
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   serial
   std_msgs
+  robot_msgs
 )
 
-catkin_package(
-  CATKIN_DEPENDS
-    serial
-    std_msgs
-)
+# catkin_package(
+#   CATKIN_DEPENDS
+#     serial
+#     std_msgs
+#     robot_msgs
+# )
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
