@@ -288,7 +288,7 @@ int main (int argc, char **argv)
 				CameraImageProcess(hCamera[i], pbyBuffer, g_pRgbBuffer,&sFrameInfo);
 				cv::Mat image;
 				image = cv::Mat(sFrameInfo.iHeight, sFrameInfo.iWidth, CV_8UC3, g_pRgbBuffer, cv::Mat::AUTO_STEP);
-				cv::resize(image,image,cv::Size(1024,1024));
+				cv::resize(image,image,cv::Size(640,480));
 				CameraReleaseImageBuffer(hCamera[i],pbyBuffer);
 				sensor_msgs::ImagePtr msg;
 				std_msgs::Header header;
