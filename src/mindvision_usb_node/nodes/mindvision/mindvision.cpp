@@ -60,7 +60,7 @@ using namespace std;
 unsigned char* g_pRgbBuffer;     // Data buffer
 
 static volatile int running = 1;
-
+ 
 static void signal_handler(int)
 {
 	running = 0;
