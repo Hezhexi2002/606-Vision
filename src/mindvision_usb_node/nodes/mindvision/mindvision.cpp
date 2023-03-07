@@ -67,6 +67,46 @@ static void signal_handler(int)
 	ros::shutdown();
 }
 
+
+namespace enc = sensor_msgs::image_encodings;
+sensor_msgs::CompressedImage cv_to_ros(cv::Mat image) // 将cv图像格式转换为ROS压缩图像格式
+{
+    std::string encoding = "rgb8";
+    int bitDepth = enc::bitDepth(encoding);
+    int numChannels = enc::numChannels(encoding);
+
+    sensor_msgs::CompressedImage compressed;
+    compressed.header = std_msgs::Header();
+    compressed.format = "rgb8";
+
+    std::vector<int> params;
+    params.resize(9, 0);
+    params[0] = IMWRITE_JPEG_QUALITY;
+    params[1] = 90;
+    params[2] = IMWRITE_JPEG_PROGRESSIVE;
+    params[3] = 0;
+    params[4] = IMWRITE_JPEG_OPTIMIZE;
+    params[5] = 0;
+    params[6] = IMWRITE_JPEG_RST_INTERVAL;
+    params[7] = 0;
+    compressed.format += "; jpeg compressed ";
+
+    if ((bitDepth == 8) || (bitDepth == 16))
+    {
+        // Target image format
+        std::string targetFormat;
+        if (enc::isColor(encoding))
+        {
+            // convert color images to BGR8 format
+            targetFormat = "bgr8";
+            compressed.format += targetFormat;
+        }
+        cv::imencode(".jpg", image, compressed.data, params);
+    }
+
+    return compressed;
+}
+
 void parse_camera_info(const cv::Mat& camMat,
                        const cv::Mat& disCoeff,
                        const cv::Size& imgSize,
@@ -260,8 +300,8 @@ int main (int argc, char **argv)
 
 	for (int i=0; i< iCameraCounts; i++)
 	{
-		std::string current_topic = "camera" + std::to_string(i) + "/image_raw";
-		publishers_cameras[i] = node_handle.advertise<sensor_msgs::Image>(current_topic, 100);
+		std::string current_topic = "camera" + std::to_string(i) + "/image_raw/compressed";
+		publishers_cameras[i] = node_handle.advertise<sensor_msgs::CompressedImage>(current_topic, 100);
 	}
 
 	// TO DO:
@@ -288,16 +328,17 @@ int main (int argc, char **argv)
 				CameraImageProcess(hCamera[i], pbyBuffer, g_pRgbBuffer,&sFrameInfo);
 				cv::Mat image;
 				image = cv::Mat(sFrameInfo.iHeight, sFrameInfo.iWidth, CV_8UC3, g_pRgbBuffer, cv::Mat::AUTO_STEP);
-				cv::resize(image,image,cv::Size(1024,1024));
+				cv::resize(image,image,cv::Size(640,480));
+				sensor_msgs::CompressedImage compressed_image = cv_to_ros(image);
 				CameraReleaseImageBuffer(hCamera[i],pbyBuffer);
 				sensor_msgs::ImagePtr msg;
 				std_msgs::Header header;
-				msg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", image).toImageMsg();
-				msg->header.frame_id = "camera";
-				msg->header.stamp.sec = ros::Time::now().sec;
-				msg->header.stamp.nsec = ros::Time::now().nsec;
-				msg->header.seq = count;
-				publishers_cameras[i].publish(msg);
+				// msg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", image).toImageMsg();
+				// msg->header.frame_id = "camera";
+				// msg->header.stamp.sec = ros::Time::now().sec;
+				// msg->header.stamp.nsec = ros::Time::now().nsec;
+				// msg->header.seq = count;
+				publishers_cameras[i].publish(compressed_image);
 			}
 		}
 		ros::spinOnce();
