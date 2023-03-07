@@ -388,7 +388,7 @@ int main(int argc, char** argv)
     robot_pose_sub_ = ros_nh_.subscribe("eskf_pose", 1, EskfPoseCallback);
     
     image_transport::ImageTransport it(ros_nh_);
-    image_sub_ = it.subscribe("/mvsua_cam/image_raw1", 1, ImageCallback);
+    image_sub_ = it.subscribe("/camera0/image_raw", 1, ImageCallback);
     
 
     //kalmanfilter init
